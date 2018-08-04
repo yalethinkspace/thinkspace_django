@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-from decouple import config, Csv
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+ALLOWED_HOSTS = [] # taken care of by django_heroku
 
 # Application definition
 
@@ -68,19 +68,6 @@ TEMPLATES = [
             ],
         },
     },
-    {
-        'BACKEND': 'django.template.backends.jinja2.Jinja2',
-        'DIRS': [
-            '/home/html/jinja2',
-        ],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'environment': 'thinkspace_django.jinja2.environment',
-            'extensions': [
-                'jinja2.ext.with_',  # this allows with keyword to be used in templates
-            ],
-        },
-    },
 ]
 
 WSGI_APPLICATION = 'thinkspace_django.wsgi.application'
@@ -89,7 +76,7 @@ WSGI_APPLICATION = 'thinkspace_django.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
+DATABASES = {  # taken care of by django_heroku
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
