@@ -143,9 +143,9 @@ STATIC_URL = '/static/'
 # Custom user model
 AUTH_USER_MODEL = "client.User"
 
+# Redirect to home URL after login (Default redirects to /users/profile/)
+LOGIN_REDIRECT_URL = '/'
+
 # Configure Django App for Heroku.
 import django_heroku
 django_heroku.settings(locals())
-
-# Redirect to home URL after login (Default redirects to /users/profile/)
-LOGIN_REDIRECT_URL = '/'
