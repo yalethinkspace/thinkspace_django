@@ -1,0 +1,15 @@
+{% macro project_card(title="Supernova", subtitle="AI for world domination", hearts="99") -%}
+<div class="card">
+    <a href="#" class="card-link"></a>
+    <img class="card-img-top" src="client/static/img/batman.jpg" alt="Card image cap">
+    <div class="card-body">
+        <h4 class="card-title">{{ title }}</h4>
+        <p class="card-text">{{ subtitle }}</p>
+        <hr>
+        <a href="#" class="btn btn-outline-danger btn-sm">
+            <i class="fa fa-heart" aria-hidden="true"></i>
+            <span class="badge badge-danger">{{ hearts }}</span>
+        </a>
+    </div>
+</div>
+{%- endmacro %}

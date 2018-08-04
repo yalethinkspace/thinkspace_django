@@ -1,0 +1,21 @@
+{% macro user_card(user={}) -%}
+<div class="card user-card">
+    <a href="#" class="card-link"></a>
+    <div class="card-body">
+        <div class="row">
+            <div class="user-text col">
+                <h4 class="card-title">{{ user["first_name"] }} {{ user["last_name"] }}</h4>
+                <h6 class="card-subtitle text-muted">@{{ user["username"] }}</h6>
+                <hr>
+                <a href="#" class="btn btn-outline-danger btn-sm align-bottom">
+                    <i class="fas fa-heart" aria-hidden="true"></i>
+                    <span class="badge badge-danger">{{ user["hearts"] }}</span>
+                </a>
+            </div>
+            <div class="user-image col">
+                <img src="{{ static('client/img/user/default.jpg') }}" class="rounded" width="100%">
+            </div>
+        </div>
+    </div>
+</div>
+{%- endmacro %}

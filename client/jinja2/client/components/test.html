@@ -1,0 +1,16 @@
+<!-- imports -->
+{% from "components/imports.html" import css, js %}
+{% from "components/navbar.html" import navbar %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {{ css() }}
+    </head>
+    <body>
+        <!-- test components here however you wish -->
+        {{ navbar() }}
+        <!-- end -->
+        {{ js() }}
+    </body>
+</html>

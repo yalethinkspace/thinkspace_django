@@ -1,0 +1,44 @@
+<!-- imports -->
+{% extends "layout.html" %}
+{% from "components/imports.html" import css_team %}
+{% from "components/user.html" import user_card %}
+<!-- add page title here -->
+{% block title %}
+Team 
+{% endblock %}
+<!-- add custom css here -->
+{% block head %}
+    {{ css_team() }} 
+{% endblock %}
+<!-- add main content here -->
+{% block content %}
+<div class="team">
+    <h1>Core Team</h1>
+    <p>We are a group of Yalies passionate about making a dent in entrepreneurship at Yale, and helping creatives find resources for success.</p>
+    <hr>
+    <div class="core">
+        <h2 class="text-center">Founders</h2>
+        {% for founder_row in team["founders"] | batch(2, "") %}
+        <div class="d-flex justify-content-center">
+            {% for founder in founder_row %}
+                {{ user_card(founder) }} 
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <h2 class="text-center">Code</h2>
+        <h2 class="text-center">Design</h2>
+        <h2 class="text-center">Finance</h2>
+        <h2 class="text-center">Outreach</h2>
+    </div>
+    <div class="call-to-action">
+        <h2>
+            Join us!
+        </h2>
+        <p>We are always looking for talented, driven students to become part of our team.</p>
+        <p>As a Core team member, you can have a greater say in moulding Thinkspace to your vision, so that it better serves the community.</p>
+    </div>
+</div>
+{% endblock %}
+<!-- add custom scripts here -->
+{% block scripts %}
+{% endblock %}

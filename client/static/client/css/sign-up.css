@@ -1,0 +1,37 @@
+.sign-up {
+    margin-top: 20px;
+}
+
+.sign-up__right-panel {
+    padding: 50px 50px; 
+}
+
+@media (max-width: 978px) {
+    .sign-up__right-panel {
+        padding: 50px 50px; 
+    }
+}
+
+.sign-up__right-panel__form {
+    padding: 20px 0px 0px 0px;
+}
+
+.sign-up_right-panel__form__buttons {
+    padding: 30px 0px 0px 0px;
+}
+
+.sign-up__right-panel__form__general-errors {
+    padding: 10px 0px 0px 0px;
+    font-size: 16px;
+    color: #FF6565;
+}
+
+.sign-up__left-panel {
+    height: 600px;
+    overflow: hidden;
+}
+
+.sign-up__left-panel__img {
+    width: 100%;
+    object-fit: fill;
+}

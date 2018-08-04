@@ -1,0 +1,86 @@
+<!-- imports -->
+{% extends "layout.html" %}
+{% from "components/imports.html" import css_sign_up, js_sign_up %}
+<!-- page title -->
+{% block title %}
+    Sign up for an account
+{% endblock %}
+<!-- add custom css here -->
+{% block head %} 
+    {{ css_sign_up() }} 
+{% endblock %}
+<!-- add main content here -->
+{% block content %}
+<div class="sign-up">
+    <div class="row">
+        <div class="col-lg-6 sign-up__left-panel">
+            <img class="sign-up__left-panel__img" src="{{url_for('client.static',filename='img/sign-up/left-panel.jpg')}}" width="100%"
+            />
+        </div>
+        <div class="col-lg-6 sign-up__right-panel">
+            <div class="sign-up__right-panel--text text-center">
+                <h2>Sign Up</h2>
+                <p>Please sign up for an account.</p>
+            </div>
+            <div class="sign-up__right-panel__form">
+                <form action="/sign-up" method="post" id="sign-up-form">
+                    <div class="row">
+                        <div class="col form-group">
+                            <label>First Name</label>
+                            <input type="text" class="form-control" id="sign-up-first-name" placeholder="John">
+                            <div class="invalid-feedback sign-up__right-panel__form__first-name__feedback">
+                            </div>
+                        </div>
+                        <div class="col form-group">
+                            <label>Last Name</label>
+                            <input type="text" class="form-control" id="sign-up-last-name" placeholder="Doe">
+                            <div class="invalid-feedback sign-up__right-panel__form__last-name__feedback">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" class="form-control" id="sign-up-username" placeholder="johndoe">
+                        <div class="invalid-feedback sign-up__right-panel__form__username__feedback">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" class="form-control" id="sign-up-email" placeholder="johndoe@gmail.com">
+                        <div class="invalid-feedback sign-up__right-panel__form__email__feedback">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label>Password</label>
+                            <input type="password" class="form-control" id="sign-up-password" placeholder="DFTBA">
+                            <div class="invalid-feedback sign-up__right-panel__form__password__feedback">
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label>Confirm Password</label>
+                            <input type="password" class="form-control" id="sign-up-confirm-password" placeholder="DFTBA">
+                            <div class="invalid-feedback sign-up__right-panel__form__confirm-password__feedback">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sign-up__right-panel__form__general-errors">
+                    </div>
+                    <div class="row sign-up_right-panel__form__buttons">
+                        <div class="col">
+                            <button type="submit" class="btn btn-lg btn-dark btn-block sign-up__right-panel__form__submit">Sign up</button>
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-lg btn-outline-dark btn-block" href="{{url_for('client.login')}}">Login</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!-- add custom scripts here -->
+{% block scripts %} 
+    {{ js_sign_up() }} 
+{% endblock %}

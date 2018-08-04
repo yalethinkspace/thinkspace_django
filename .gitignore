@@ -1,0 +1,17 @@
+.vscode/settings.json
+credentials.txt
+.env
+__pycache__/
+*.py[cod]
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+*.log
+*.pot
+docs/_build/
+*.bak
+*.sqlite3
+media/
+static/

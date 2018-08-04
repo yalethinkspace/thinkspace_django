@@ -1,0 +1,1 @@
+web: gunicorn thinkspace_django.wsgi

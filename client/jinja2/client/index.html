@@ -1,0 +1,76 @@
+<!-- imports -->
+{% from "client/components/user.html" import user_card %}
+{% from "client/components/project.html" import project_card %}
+{% extends "client/layout.html" %}
+<!-- html -->
+{% block title %}Welcome{% endblock %} {% block content %}
+<br>
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <h1>Find and work on cool projects with other Yalies.</h1>
+                <p>Great ideas in their initial stages are often fragile ones. Yale Thinkspace helps ideas materialize through
+                    a network of people and resources. We also hope to provide informal spaces for pitching, prototyping
+                    projects, and developing new skills.</p>
+                <p>Interested? Sign up or view our about page. Or just scroll below and click through to public projects and
+                    user profiles to see what's cooking.</p>
+                <p>
+                    <a class="btn btn-primary" href="#" role="button">Sign up
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-primary" href="#" role="button">Find out more
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </p>
+            </div>
+            <div class="col-md">
+                <img class="img-fluid pull-right" src="{{ static('client/img/index/cover.png') }}">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 text-md-left">
+        <h3>Featured projects</h3>
+        <span>Click a card to see more information, or leave a heart!</span>
+    </div>
+    <div class="col-md-6 text-md-right">
+        <a href="#" class="btn btn-primary">Browse public projects
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+
+<br>
+
+<div class="card-deck">
+    {{ project_card() }}
+    {{ project_card() }}
+    {{ project_card() }}
+</div>
+
+<br>
+<br>
+
+<div class="row">
+    <div class="col-md-6 text-md-left">
+        <h3>Rising users</h3>
+        <span>Click a card to see more information, or leave a heart!</span>
+    </div>
+    <div class="col-md-6 text-md-right">
+        <a href="#" class="btn btn-primary">Browse users
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+
+<br>
+
+<div class="card-deck">
+    {{ user_card() }}
+    {{ user_card() }}
+    {{ user_card() }}
+</div>
+{% endblock %}

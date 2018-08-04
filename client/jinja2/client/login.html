@@ -1,0 +1,68 @@
+<!-- imports -->
+{% extends "layout.html" %}
+{% from "components/imports.html" import css_login, js_login %}
+<!-- page title -->
+{% block title %} 
+Login to your account
+{% endblock %}
+<!-- add custom css here -->
+{% block head %} 
+{{ css_login() }}
+{% endblock %}
+<!-- add main content here -->
+{% block content %}
+<div class="login">
+    <div class="row">
+        <div class="col-lg-6 login__left-panel">
+            <img class="login__left-panel__img" src="{{url_for('client.static',filename='img/login/left-panel.jpg')}}" width="100%"/>
+        </div>
+        <div class="col-lg-6 login__right-panel">
+            <div class="login__right-panel--text text-center">
+                <h2>Login</h2>
+                <p>Welcome back! Please login to your account.</p>
+            </div>
+            <div class="login__right-panel__form">
+                <form action="/login" method="post" id="login-form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="login-username" placeholder="johndoe">
+                        <div class="invalid-feedback login__right-panel__form__username__feedback">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="login-password" placeholder="DFTBA">
+                        <div class="invalid-feedback login__right-panel__form__password__feedback">
+                        </div>
+                    </div>
+                    <div class="login__right-panel__form__context row">
+                        <!-- <div class="col-6">
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="login-remember">
+                                <label class="form-check-label" for="login-remember">Remember me</label>
+                            </div>
+                        </div> -->
+                        <!-- <div class="col-6">
+                            <span>Forgot password?</span>
+                        </div> -->
+                    </div>
+                    <div class="login__right-panel__form__general-errors">
+                    </div>
+                    <div class="row login_right-panel__form__buttons">
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-lg btn-dark btn-block login__right-panel__form__submit">Login</button>
+                        </div>
+                        <div class="col-6">
+                            <a class="btn btn-lg btn-outline-dark btn-block" href="{{url_for('client.sign_up')}}">Sign up</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!-- add custom scripts here -->
+{% block scripts %}
+{{ js_login() }}
+{% endblock %}
