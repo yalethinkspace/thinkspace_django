@@ -1,0 +1,32 @@
+<!-- imports -->
+{% load static %}
+<!-- html -->
+<footer class="bd-footer text-muted">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+                <ul class="bd-footer-links">
+                    <li>
+                        <a href="">About</a>
+                    </li>
+                    <li>
+                        <a href="">Team</a>
+                    </li>
+                    <li>
+                        <a href="">Contact us</a>
+                    </li>
+                </ul>
+                <p>Founded by Sarim Abbas and Felicia Chang. Maintained with the help of our contributors.</p>
+                <p>Disclaimer: This website is maintained by Yale College students and Yale University is not responsible for
+                    its contents.</p>
+                <p>&copy;
+                    <script>
+                        document.write(new Date().getFullYear())
+                    </script> Yale Thinkspace - an Undergraduate Organization.</p>
+            </div>
+            <div class="col-sm-3">
+                <img src="{% static 'img/footer.png' %}" width="200px" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</footer>

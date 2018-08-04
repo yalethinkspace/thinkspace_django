@@ -1,4 +1,5 @@
 .vscode/settings.json
+.vscode/
 credentials.txt
 .env
 __pycache__/

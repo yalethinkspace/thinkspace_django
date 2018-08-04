@@ -1,0 +1,46 @@
+<!-- imports -->
+{% extends "layout.html" %}
+{% load static %} 
+{% load bootstrap4 %}
+<!-- page title -->
+{% block title %}
+    Sign up for an account
+{% endblock %}
+<!-- add custom css here -->
+{% block head %} 
+    <link rel="stylesheet" href="{% static 'css/sign-up.css' %}">
+{% endblock %}
+<!-- add main content here -->
+{% block content %}
+<div class="sign-up">
+    <div class="row">
+        <div class="col-lg-6 sign-up__left-panel">
+            <img class="sign-up__left-panel__img" src="{% static 'img/sign-up/left-panel.jpg' %}" width="100%"
+            />
+        </div>
+        <div class="col-lg-6 sign-up__right-panel">
+            <div class="sign-up__right-panel--text text-center">
+                <h2>Sign Up</h2>
+                <p>Please sign up for an account.</p>
+            </div>
+            <div class="sign-up__right-panel__form">
+                <form method="post" novalidate>
+                    {% csrf_token %} {% include 'include/form.html' with form=form %}
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-lg btn-dark btn-block">Sign up</button>
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-lg btn-outline-dark btn-block" href="">Login</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!-- add custom scripts here -->
+{% block scripts %} 
+    <script src="{% static 'js/sign-up.js' %}"></script>
+{% endblock %}
