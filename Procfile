@@ -1,1 +1,1 @@
-web: gunicorn thinkspace_django.wsgi
+web: gunicorn thinkspace_django.wsgi --log-file -
