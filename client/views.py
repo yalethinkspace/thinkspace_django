@@ -1,6 +1,8 @@
 from django.shortcuts import render, HttpResponse, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, update_session_auth_hash
 from django.contrib.auth.signals import user_logged_in, user_logged_out
+from django.contrib.auth.forms import PasswordChangeForm
+from django.views.decorators.http import require_POST, require_GET, require_http_methods
 from django.dispatch import receiver
 from django.contrib import messages
 from client.forms import SignUpForm
@@ -67,3 +69,18 @@ def activate(request, uidb64, token):
         messages.error(request, 'Your account could not be verified.')
         return redirect('index')
 
+@require_POST
+def change_password(request):
+    form = PasswordChangeForm(request.user, request.POST)
+    if form.is_valid():
+        user = form.save()
+        update_session_auth_hash(request, user)  # Important!
+        messages.success(
+            request, 'Your password was successfully changed.')
+    else:
+        messages.error(request, 'Your password could not be changed. Please correct any errors.')
+    return redirect('dashboard')
+
+def dashboard(request):
+    password_change_form = PasswordChangeForm(request.user)
+    return render(request, 'dashboard.html', {'password_change_form' : password_change_form})

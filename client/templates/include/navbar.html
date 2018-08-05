@@ -78,7 +78,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     {% if user.is_authenticated %}
-                        <a class="dropdown-item" href="">Dashboard</a>
+                        <a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a>
                         <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                     {% else %}
                         <a class="dropdown-item" href="{% url 'login' %}">Login</a>

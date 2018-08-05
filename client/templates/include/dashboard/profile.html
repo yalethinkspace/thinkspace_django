@@ -1,0 +1,102 @@
+{% load static %}
+<div class="card">
+    <div class="card-body">
+        <h1 class="card-title">Profile</h1>
+        <p class="card-text">You can tweak your profile using the options below.</p>
+        <!-- upload photo -->
+        <hr>
+        <h2 class="dashboard__profile__heading">Upload a photo</h2>
+        <div class="dashboard__profile__img">
+            <img src="{% static 'img/dashboard/profile/default.jpg' %}" class="rounded" width="50%">
+        </div>
+        <form>
+            <button type="input" class="btn btn-secondary dashboard__profile__submit">Choose</button>
+            <button type="submit" class="btn btn-primary dashboard__profile__submit">Upload</button>
+        </form>
+        <!-- edit basic information -->
+        <hr>
+        <h2 class="dashboard__profile__heading">Edit basic information</h2>
+        <form>
+            <div class="row">
+                <div class="form-group col">
+                    <label>Username</label>
+                    <input type="text" class="form-control" id="login-username" placeholder="johndoe" disabled>
+                    <span class="text-muted">Username edits are not supported at this time.</span>
+                </div>
+                <div class="form-group col">
+                    <label>Email</label>
+                    <input type="email" class="form-control" id="login-username" placeholder="johndoe">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col">
+                    <label>First name</label>
+                    <input type="text" class="form-control" placeholder="First name">
+                </div>
+                <div class="form-group col">
+                    <label>Last name</label>
+                    <input type="text" class="form-control" placeholder="Last name">
+                </div>
+            </div>
+            <div class="d-flex justify-content-end align-items-center">
+                <button type="submit" class="btn btn-primary dashboard__profile__submit">Update</button>
+            </div>
+        </form>
+        <!-- change password -->
+        <hr>
+        <h2 class="dashboard__profile__heading">Change password</h2>
+        <form method="post" action="/change-password/" novalidate>
+            {% csrf_token %} 
+            {% include 'include/generic/form.html' with form=password_change_form %}
+            <div class="d-flex justify-content-end align-items-center">
+                <button type="submit" class="btn btn-primary dashboard__profile__submit">Change</button>
+            </div>
+        </form>
+        <!-- add promotional info -->
+        <hr>
+        <h2 class="dashboard__profile__heading">Promote yourself</h2>
+        <h3 class="dashboard__profile__heading">Write about...anything!</h3>
+        <form>
+            <div class="form-group">
+                <label>Rich text editing coming soon!</label>
+                <textarea class="form-control" rows="3"></textarea>
+            </div>
+            <div class="d-flex justify-content-end align-items-center">
+                <button type="button" class="btn btn-primary">Update</button>
+            </div>
+        </form>
+        <h3 class="dashboard__profile__heading">Add external links</h3>
+        <form>
+            <div class="form-group">
+                <label>Add in a comma-separated list of emails, links to your social networks and/or memes.</label>
+                <textarea class="form-control" rows="3"></textarea>
+            </div>
+            <div class="d-flex justify-content-end align-items-center">
+                <button type="button" class="btn btn-primary">Update</button>
+            </div>
+        </form>
+        <h3 class="dashboard__profile__heading">Add courses you've taken</h3>
+        <form>
+            <div class="form-group">
+                <input type="text" class="form-control dashboard__profile__course-search" placeholder="Search...">
+            </div>
+            <div class="dashboard__profile__course-badges">
+                <span class="badge badge-pill badge-primary">AFAM 220</span>
+                <span class="badge badge-pill badge-primary">CPSC 100</span>
+                <span class="badge badge-pill badge-primary">CPSC 365</span>
+            </div>
+            <div class="d-flex justify-content-end align-items-center">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </form>
+        <h3 class="dashboard__profile__heading">Upload a resume</h3>
+        <form>
+            <div class="form-group">
+                <input type="text" class="dashboard__profile__resume-upload" placeholder="">
+            </div>
+            <div class="d-flex justify-content-end align-items-center">
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </div>
+        </form>
+    </div>
+</div>
