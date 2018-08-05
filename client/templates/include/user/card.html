@@ -1,21 +1,20 @@
-{% macro user_card(user={}) -%}
+{% load static %}
 <div class="card user-card">
     <a href="#" class="card-link"></a>
     <div class="card-body">
         <div class="row">
             <div class="user-text col">
-                <h4 class="card-title">{{ user["first_name"] }} {{ user["last_name"] }}</h4>
-                <h6 class="card-subtitle text-muted">@{{ user["username"] }}</h6>
+                <h4 class="card-title">Sarim Abbas </h4>
+                <h6 class="card-subtitle text-muted">@sarimabbas</h6>
                 <hr>
                 <a href="#" class="btn btn-outline-danger btn-sm align-bottom">
                     <i class="fas fa-heart" aria-hidden="true"></i>
-                    <span class="badge badge-danger">{{ user["hearts"] }}</span>
+                    <span class="badge badge-danger">99</span>
                 </a>
             </div>
             <div class="user-image col">
-                <img src="{{ static('client/img/user/default.jpg') }}" class="rounded" width="100%">
+                <img src="{% static 'img/user/default.jpg' %}" class="rounded" width="100%">
             </div>
         </div>
     </div>
 </div>
-{%- endmacro %}

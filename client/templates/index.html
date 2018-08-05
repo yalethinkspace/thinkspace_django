@@ -1,9 +1,9 @@
 <!-- imports -->
-{% from "client/components/user.html" import user_card %}
-{% from "client/components/project.html" import project_card %}
-{% extends "client/layout.html" %}
+{% extends "layout.html" %}
+{% load static %}
 <!-- html -->
-{% block title %}Welcome{% endblock %} {% block content %}
+{% block title %}Welcome{% endblock %} 
+{% block content %}
 <br>
 <div class="jumbotron">
     <div class="container">
@@ -25,7 +25,7 @@
                 </p>
             </div>
             <div class="col-md">
-                <img class="img-fluid pull-right" src="{{ static('client/img/index/cover.png') }}">
+                <img class="img-fluid pull-right" src="{% static 'client/img/index/cover.png' %}">
             </div>
         </div>
     </div>
@@ -46,9 +46,7 @@
 <br>
 
 <div class="card-deck">
-    {{ project_card() }}
-    {{ project_card() }}
-    {{ project_card() }}
+    {% include 'include/project/card.html' %}
 </div>
 
 <br>
@@ -69,8 +67,6 @@
 <br>
 
 <div class="card-deck">
-    {{ user_card() }}
-    {{ user_card() }}
-    {{ user_card() }}
+    {% include 'include/user/card.html' %}
 </div>
 {% endblock %}

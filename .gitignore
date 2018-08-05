@@ -16,3 +16,4 @@ docs/_build/
 *.sqlite3
 media/
 static/
+db.sqlite3

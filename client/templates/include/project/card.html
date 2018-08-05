@@ -1,7 +1,7 @@
-{% macro project_card(title="Supernova", subtitle="AI for world domination", hearts="99") -%}
+{% load static %}
 <div class="card">
     <a href="#" class="card-link"></a>
-    <img class="card-img-top" src="client/static/img/batman.jpg" alt="Card image cap">
+    <img class="card-img-top" src="{% static 'img/batman.jpg' %}" alt="Card image cap">
     <div class="card-body">
         <h4 class="card-title">{{ title }}</h4>
         <p class="card-text">{{ subtitle }}</p>
@@ -12,4 +12,3 @@
         </a>
     </div>
 </div>
-{%- endmacro %}

@@ -23,39 +23,15 @@ Login to your account
                 <p>Welcome back! Please login to your account.</p>
             </div>
             <div class="login__right-panel__form">
-                <form method="post" id="login-form">
-                    <!-- <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}"> -->
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" class="form-control" id="login-username" placeholder="johndoe">
-                        <div class="invalid-feedback login__right-panel__form__username__feedback">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="login-password" placeholder="DFTBA">
-                        <div class="invalid-feedback login__right-panel__form__password__feedback">
-                        </div>
-                    </div>
-                    <div class="login__right-panel__form__context row">
-                        <!-- <div class="col-6">
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="login-remember">
-                                <label class="form-check-label" for="login-remember">Remember me</label>
-                            </div>
-                        </div> -->
-                        <!-- <div class="col-6">
-                            <span>Forgot password?</span>
-                        </div> -->
-                    </div>
-                    <div class="login__right-panel__form__general-errors">
-                    </div>
+                <form method="post" novalidate>
+                    {% csrf_token %} 
+                    {% include 'include/generic/form.html' with form=form %}
                     <div class="row login_right-panel__form__buttons">
                         <div class="col-6">
                             <button type="submit" class="btn btn-lg btn-dark btn-block login__right-panel__form__submit">Login</button>
                         </div>
                         <div class="col-6">
-                            <a class="btn btn-lg btn-outline-dark btn-block" href="">Sign up</a>
+                            <a class="btn btn-lg btn-outline-dark btn-block" href="{% url 'sign-up' %}">Sign up</a>
                         </div>
                     </div>
                 </form>
