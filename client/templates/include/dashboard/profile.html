@@ -16,37 +16,11 @@
         <!-- edit basic information -->
         <hr>
         <h2 class="dashboard__profile__heading">Edit basic information</h2>
-        <!-- <form>
-            <div class="row">
-                <div class="form-group col">
-                    <label>Username</label>
-                    <input type="text" class="form-control" id="login-username" placeholder="johndoe" disabled>
-                    <span class="text-muted">Username edits are not supported at this time.</span>
-                </div>
-                <div class="form-group col">
-                    <label>Email</label>
-                    <input type="email" class="form-control" id="login-username" placeholder="johndoe">
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col">
-                    <label>First name</label>
-                    <input type="text" class="form-control" placeholder="First name">
-                </div>
-                <div class="form-group col">
-                    <label>Last name</label>
-                    <input type="text" class="form-control" placeholder="Last name">
-                </div>
-            </div>
-            <div class="d-flex justify-content-end align-items-center">
-                <button type="submit" class="btn btn-primary dashboard__profile__submit">Update</button>
-            </div>
-        </form> -->
-        <form method="post" action="{% url 'basic_info' %}" novalidate>
+        <form method="post" action="{% url 'dashboard_basic_info' %}" novalidate>
             {% csrf_token %} 
             {% include 'include/generic/form.html' with form=basic_info_form %}
             <div class="d-flex justify-content-end align-items-center">
-                <button type="submit" class="btn btn-primary dashboard__profile__submit">Change</button>
+                <button type="submit" class="btn btn-primary dashboard__profile__submit">Update</button>
             </div>
         </form>
         <!-- change password -->
@@ -56,53 +30,31 @@
             {% csrf_token %} 
             {% include 'include/generic/form.html' with form=password_change_form %}
             <div class="d-flex justify-content-end align-items-center">
-                <button type="submit" class="btn btn-primary dashboard__profile__submit">Change</button>
+                <button type="submit" class="btn btn-primary dashboard__profile__submit">Update</button>
             </div>
         </form>
-        <!-- add promotional info -->
+        <!-- about -->
         <hr>
-        <h2 class="dashboard__profile__heading">Promote yourself</h2>
-        <h3 class="dashboard__profile__heading">Write about...anything!</h3>
-        <form>
-            <div class="form-group">
-                <label>Rich text editing coming soon!</label>
-                <textarea class="form-control" rows="3"></textarea>
-            </div>
+        <h2 class="dashboard__profile__heading">About</h2>
+        <h4 class="dashboard__profile__heading">Discuss your background, hobbies and projects.</h4>
+        <p class="card-text">Write in HTML or text. Add as many links as you like.</p>
+        <form method="post" action="{% url 'dashboard_about' %}" novalidate>
+            {% csrf_token %} 
+            {{ about_form }}
             <div class="d-flex justify-content-end align-items-center">
-                <button type="button" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary dashboard__profile__submit">Update</button>
             </div>
         </form>
-        <h3 class="dashboard__profile__heading">Add external links</h3>
-        <form>
-            <div class="form-group">
-                <label>Add in a comma-separated list of emails, links to your social networks and/or memes.</label>
-                <textarea class="form-control" rows="3"></textarea>
-            </div>
-            <div class="d-flex justify-content-end align-items-center">
-                <button type="button" class="btn btn-primary">Update</button>
-            </div>
-        </form>
-        <h3 class="dashboard__profile__heading">Add courses you've taken</h3>
-        <form>
-            <div class="form-group">
-                <input type="text" class="form-control dashboard__profile__course-search" placeholder="Search...">
-            </div>
-            <div class="dashboard__profile__course-badges">
-                <span class="badge badge-pill badge-primary">AFAM 220</span>
-                <span class="badge badge-pill badge-primary">CPSC 100</span>
-                <span class="badge badge-pill badge-primary">CPSC 365</span>
-            </div>
-            <div class="d-flex justify-content-end align-items-center">
-                <button type="submit" class="btn btn-primary">Update</button>
-            </div>
-        </form>
-        <h3 class="dashboard__profile__heading">Upload a resume</h3>
+        <!-- resume -->
+        <hr>
+        <h3 class="dashboard__profile__heading">Add a resume</h3>
+        <p class="card-text">Link to your website or a document (Google Drive works well).</p>
         <form>
             <div class="form-group">
                 <input type="text" class="dashboard__profile__resume-upload" placeholder="">
             </div>
             <div class="d-flex justify-content-end align-items-center">
-                <button type="submit" class="btn btn-primary">Upload</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </form>
     </div>

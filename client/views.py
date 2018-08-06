@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth import login, authenticate, update_session_auth_hash
 from django.contrib.auth.signals import user_logged_in, user_logged_out
@@ -5,7 +6,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.views.decorators.http import require_POST, require_GET, require_http_methods
 from django.dispatch import receiver
 from django.contrib import messages
-from client.forms import SignUpForm, DashboardBasicInfoForm
+from client.forms import SignUpForm, DashboardBasicInfoForm, DashboardAboutForm
 
 # email confirmation
 from django.contrib.sites.shortcuts import get_current_site
@@ -90,9 +91,11 @@ def change_password(request):
 def dashboard(request):
     password_change_form = PasswordChangeForm(request.user)
     basic_info_form = DashboardBasicInfoForm(instance=request.user)
+    about_form = DashboardAboutForm(instance=request.user)
     return render(request, 'dashboard.html', {
         'password_change_form' : password_change_form,
         'basic_info_form': basic_info_form,
+        'about_form' : about_form
         })
 
 @require_POST
@@ -107,3 +110,15 @@ def dashboard_basic_info(request):
             request, 'Your information could not be changed. Please correct any errors.')
     return redirect('dashboard')
     
+
+@require_POST
+def dashboard_about(request):
+    form = DashboardAboutForm(request.POST, instance=request.user)
+    if form.is_valid():
+        form.save()
+        messages.success(
+            request, 'Your information was successfully changed.')
+    else:
+        messages.error(
+            request, 'Your information could not be changed. Please correct any errors.')
+    return redirect('{}#profile'.format(reverse('dashboard')))

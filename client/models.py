@@ -1,4 +1,5 @@
 from django.db import models
+from tinymce.models import HTMLField
 from django.contrib.auth.models import AbstractUser
 from django.db.models.functions import Substr
 from django.db.models.signals import post_save
@@ -27,6 +28,7 @@ class User(AbstractUser):
     is_mentor = models.BooleanField(default=False)
     site_roles = models.ManyToManyField(UserSiteRole, related_name="users", blank=True)
     courses = models.ManyToManyField(Course, related_name="courses", blank=True)
+    about = HTMLField(blank=True)
 
     def __str__(self):
         return "{}".format(self.username)

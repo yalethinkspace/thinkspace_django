@@ -20,4 +20,5 @@ urlpatterns = [
     path('', include('client.urls')),
     path('area51/', admin.site.urls),
     path('users/', include('django.contrib.auth.urls')),
+    path('tinymce/', include('tinymce.urls')),
 ]

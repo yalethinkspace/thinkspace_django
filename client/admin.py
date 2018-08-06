@@ -8,7 +8,7 @@ ProjectCategory, ProjectJoinRequest, ProjectComment, ProjectPost, ProjectTag)
 # extend the User admin panel to show extra fields
 class UserAdmin(BaseUserAdmin):
     fieldsets = BaseUserAdmin.fieldsets + (
-        (None, {'fields': ('hearts', 'hearted_users', 'description', 'links', 'image', 'is_moderator', 'is_mentor')}),
+        (None, {'fields': ('hearts', 'hearted_users', 'description', 'links', 'image', 'is_moderator', 'is_mentor', 'about')}),
     )
 
 class UserSiteRoleAdmin(admin.ModelAdmin):
