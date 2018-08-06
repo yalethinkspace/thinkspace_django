@@ -9,6 +9,9 @@ urlpatterns = [
         views.activate, name='activate'), 
     path('dashboard/', views.dashboard, name='dashboard'),
     path('dashboard/profile/', views.dashboard_profile, name='dashboard_profile'),
+    path('dashboard/settings/', views.dashboard_settings, name='dashboard_settings'),
     path('dashboard/change_password/', views.change_password, name='change_password'),
+    path('dashboard/messages/', views.dashboard_messages_conversation_list, name='dashboard_messages'),
 ]
+ 
  

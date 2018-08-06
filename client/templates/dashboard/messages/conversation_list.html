@@ -1,0 +1,45 @@
+<!-- imports -->
+{% extends "dashboard/messages/layout.html" %} 
+{% load static %}
+<!-- add page title here -->
+{% block title %} 
+    Dashboard - Messages 
+{% endblock %}
+<!-- add custom css here -->
+{% block head %} 
+    {{ block.super }} 
+{% endblock %}
+<!-- add main content here -->
+{% block messages %}
+    {% for conversation in conversations.all %}
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <!-- show profile picture of the other person in the conversation -->
+                    <div class="col">
+                        {% for user in conversation.conversants.all %}
+                            {% if user != request.user %}
+                                {% if user.photo %}
+                                    <img src="{{ user.photo }}" width="50px" class="rounded">
+                                {% else %}
+                                    <i class="fa fa-user-circle fa-lg" aria-hidden="true"></i>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="col">
+                        {% for user in conversation.conversants.all %}
+                            {% if user != request.user %}
+                                <span>{{ user.username }}</span>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+<!-- add custom scripts here -->
+{% block scripts %} 
+    {{ block.super }} 
+{% endblock %}

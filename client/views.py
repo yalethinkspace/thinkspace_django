@@ -1,5 +1,6 @@
 from django.urls import reverse
 from django.shortcuts import render, HttpResponse, redirect
+from django.http import JsonResponse
 from django.contrib.auth import login, authenticate, update_session_auth_hash
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.contrib.auth.forms import PasswordChangeForm
@@ -17,7 +18,7 @@ from client.tokens import account_activation_token
 from django.utils.encoding import force_text
 
 # models
-from client.models import User
+from client.models import User, Message, Conversation
 
 # render home page
 def index(request):
@@ -95,6 +96,9 @@ def dashboard_profile(request):
     if request.method == 'POST':
         print(request.POST)
         # deal with multiple forms
+        # HTML form names must be distinct from the data trying to be saved by
+        # the form (as below with the _form suffix), otherwise it will coalesce
+        # with the form name and save empty
         if 'photo_form' in request.POST:
             form = DashboardPhotoForm(request.POST, instance=request.user)
         if 'about_form' in request.POST:
@@ -123,4 +127,26 @@ def dashboard_profile(request):
         'about_form': about_form,
         'photo_form': photo_form,
         'resume_form': resume_form,
+    })
+
+def dashboard_settings(request):
+    if request.method == 'POST':
+        # deal with multiple forms
+        # HTML form names must be distinct from the data trying to be saved by
+        # the form (as below with the _form suffix), otherwise it will coalesce
+        # with the form name and save empty
+        if 'delete_form' in request.POST:
+            try:
+                request.user.delete()
+                messages.success(request, "Your account was deleted.")
+            except Exception as e:
+                messages.error(request, "Something went wrong. Your account could not be deleted.")
+        return redirect('index')
+    return render(request, 'dashboard/settings.html')
+
+def dashboard_messages_conversation_list(request):
+    conversations = request.user.conversations.all()
+    return render(request, 'dashboard/messages/conversation_list.html', 
+    {
+        "conversations" : conversations,
     })

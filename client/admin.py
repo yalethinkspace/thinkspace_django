@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from client.models import (User, UserSiteRole, Course, Project, 
-ProjectCategory, ProjectJoinRequest, ProjectComment, ProjectPost, ProjectTag)
+ProjectCategory, ProjectJoinRequest, ProjectComment, ProjectPost, ProjectTag, Message, Conversation)
 
 # Register your models here.
 
@@ -35,6 +35,12 @@ class ProjectPostAdmin(admin.ModelAdmin):
 class ProjectTagAdmin(admin.ModelAdmin):
     list_display = ["name"]
 
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ["sender", "receiver"]
+
+class ConversationAdmin(admin.ModelAdmin):
+    list_display = []
+
 # Register your models here.
 admin.site.register(User, UserAdmin)
 admin.site.register(UserSiteRole, UserSiteRoleAdmin)
@@ -45,3 +51,5 @@ admin.site.register(ProjectJoinRequest, ProjectJoinRequestAdmin)
 admin.site.register(ProjectComment, ProjectCommentAdmin)
 admin.site.register(ProjectPost, ProjectPostAdmin)
 admin.site.register(ProjectTag, ProjectTagAdmin)
+admin.site.register(Message, MessageAdmin) 
+admin.site.register(Conversation, ConversationAdmin)

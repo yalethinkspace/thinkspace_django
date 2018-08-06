@@ -1,0 +1,37 @@
+<!-- imports -->
+{% extends "dashboard/layout.html" %} 
+{% load static %}
+<!-- add page title here -->
+{% block title %} 
+    Dashboard - Settings 
+{% endblock %}
+<!-- add custom css here -->
+{% block head %} 
+    {{ block.super }} 
+{% endblock %}
+<!-- switch active panel -->
+{% block settings_active %}
+active
+{% endblock %}
+<!-- add main content here -->
+{% block panel %}
+<div class="card">
+    <div class="card-body">
+        <h1 class="card-title">Settings</h1>
+        <!-- delete account -->
+        <hr>
+        <h2 class="dashboard__profile__heading">Delete your account</h2>
+        <p class="card-text">Warning: this will delete everything associated with your account, such as profile and messages. This is irreversible.</p>
+        <form method="post" id="delete_form" action="{% url 'dashboard_settings' %}" novalidate>
+            {% csrf_token %} 
+            <div class="d-flex justify-content-end align-items-center">
+                <button type="submit" name="delete_form" class="btn btn-danger dashboard__profile__submit">Delete</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+<!-- add custom scripts here -->
+{% block scripts %} 
+    {{ block.super }} 
+{% endblock %}
