@@ -5,18 +5,25 @@
         <p class="card-text">You can tweak your profile using the options below.</p>
         <!-- upload photo -->
         <hr>
-        <h2 class="dashboard__profile__heading">Upload a photo</h2>
+        <h2 class="dashboard__profile__heading">Add a profile picture</h2>
         <div class="dashboard__profile__img">
-            <img src="{% static 'img/dashboard/profile/default.jpg' %}" class="rounded" width="50%">
+            {% if user.photo %}
+            <img src="{{ user.photo }}" class="rounded" width="50%">
+            {% else %}
+            <p>You don't seem to have a profile picture. Upload one!</p>
+            {% endif %}
         </div>
-        <form>
-            <button type="input" class="btn btn-secondary dashboard__profile__submit">Choose</button>
-            <button type="submit" class="btn btn-primary dashboard__profile__submit">Upload</button>
+        <form method="post" id="photo" action="{% url 'dashboard' %}" novalidate>
+            {% csrf_token %} 
+            {% include 'include/generic/form.html' with form=photo_form %}
+            <div class="d-flex justify-content-end align-items-center">
+                <button type="submit" class="btn btn-primary dashboard__profile__submit">Update</button>
+            </div>
         </form>
         <!-- edit basic information -->
         <hr>
         <h2 class="dashboard__profile__heading">Edit basic information</h2>
-        <form method="post" action="{% url 'dashboard_basic_info' %}" novalidate>
+        <form method="post" id="basic_info" action="{% url 'dashboard' %}" novalidate>
             {% csrf_token %} 
             {% include 'include/generic/form.html' with form=basic_info_form %}
             <div class="d-flex justify-content-end align-items-center">
@@ -26,7 +33,7 @@
         <!-- change password -->
         <hr>
         <h2 class="dashboard__profile__heading">Change password</h2>
-        <form method="post" action="{% url 'change_password' %}" novalidate>
+        <form method="post" id="change_password" action="{% url 'change_password' %}" novalidate>
             {% csrf_token %} 
             {% include 'include/generic/form.html' with form=password_change_form %}
             <div class="d-flex justify-content-end align-items-center">
@@ -38,7 +45,7 @@
         <h2 class="dashboard__profile__heading">About</h2>
         <h4 class="dashboard__profile__heading">Discuss your background, hobbies and projects.</h4>
         <p class="card-text">Write in HTML or text. Add as many links as you like.</p>
-        <form method="post" action="{% url 'dashboard_about' %}" novalidate>
+        <form method="post" id="about" action="{% url 'dashboard' %}" novalidate>
             {% csrf_token %} 
             {{ about_form }}
             <div class="d-flex justify-content-end align-items-center">
@@ -49,12 +56,11 @@
         <hr>
         <h3 class="dashboard__profile__heading">Add a resume</h3>
         <p class="card-text">Link to your website or a document (Google Drive works well).</p>
-        <form>
-            <div class="form-group">
-                <input type="text" class="dashboard__profile__resume-upload" placeholder="">
-            </div>
+        <form method="post" id="resume" action="{% url 'dashboard' %}" novalidate>
+            {% csrf_token %} 
+            {% include 'include/generic/form.html' with form=resume_form %}
             <div class="d-flex justify-content-end align-items-center">
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary dashboard__profile__submit">Update</button>
             </div>
         </form>
     </div>

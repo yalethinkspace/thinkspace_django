@@ -21,14 +21,13 @@ class Course(models.Model):
 class User(AbstractUser):
     hearts = models.IntegerField(default=0)
     hearted_users = models.ManyToManyField("User", related_name="hearted_by", blank=True)
-    description = models.TextField(blank=True, null=True)
-    links = models.TextField(blank=True, null=True)
-    image = models.ImageField(blank=True, null=True, upload_to=upload_to)
     is_moderator = models.BooleanField(default=False)
     is_mentor = models.BooleanField(default=False)
     site_roles = models.ManyToManyField(UserSiteRole, related_name="users", blank=True)
     courses = models.ManyToManyField(Course, related_name="courses", blank=True)
     about = HTMLField(blank=True)
+    photo = models.URLField(blank=True)
+    resume = models.URLField(blank=True)
 
     def __str__(self):
         return "{}".format(self.username)

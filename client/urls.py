@@ -9,7 +9,5 @@ urlpatterns = [
         views.activate, name='activate'), 
     path('dashboard/', views.dashboard, name='dashboard'),
     path('dashboard/change_password/', views.change_password, name='change_password'),
-    path('dashboard/basic_info/', views.dashboard_basic_info, name='dashboard_basic_info'),
-    path('dashboard/about/', views.dashboard_about, name='dashboard_about'),
 ]
  

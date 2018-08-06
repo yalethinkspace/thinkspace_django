@@ -25,3 +25,13 @@ class DashboardAboutForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['about']
+
+class DashboardPhotoForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['photo']
+
+class DashboardResumeForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['resume']

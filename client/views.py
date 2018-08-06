@@ -6,7 +6,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.views.decorators.http import require_POST, require_GET, require_http_methods
 from django.dispatch import receiver
 from django.contrib import messages
-from client.forms import SignUpForm, DashboardBasicInfoForm, DashboardAboutForm
+from client.forms import *
 
 # email confirmation
 from django.contrib.sites.shortcuts import get_current_site
@@ -89,36 +89,33 @@ def change_password(request):
 
 # render dashboard
 def dashboard(request):
-    password_change_form = PasswordChangeForm(request.user)
-    basic_info_form = DashboardBasicInfoForm(instance=request.user)
-    about_form = DashboardAboutForm(instance=request.user)
+    if request.method == 'POST':
+        if "photo" in request.POST:
+            form = DashboardPhotoForm(request.POST, instance=request.user)
+        if "about" in request.POST:
+            form = DashboardAboutForm(request.POST, instance=request.user)
+        if "basic_info" in request.POST:
+            form = DashboardBasicInfoForm(request.POST, instance=request.user)
+        if "resume" in request.POST:
+            form = DashboardResumeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request, 'Your information was successfully changed.')
+        else:
+            messages.error(
+                request, 'Your information could not be changed. Please correct any errors.')
+        return redirect('dashboard')
+    else:
+        password_change_form = PasswordChangeForm(request.user)
+        basic_info_form = DashboardBasicInfoForm(instance=request.user)
+        about_form = DashboardAboutForm(instance=request.user)
+        photo_form = DashboardPhotoForm(instance=request.user)
+        resume_form = DashboardResumeForm(instance=request.user)
     return render(request, 'dashboard.html', {
         'password_change_form' : password_change_form,
         'basic_info_form': basic_info_form,
-        'about_form' : about_form
+        'about_form' : about_form,
+        'photo_form' : photo_form,
+        'resume_form' : resume_form,
         })
-
-@require_POST
-def dashboard_basic_info(request):
-    form = DashboardBasicInfoForm(request.POST, instance=request.user)
-    if form.is_valid():
-        form.save()
-        messages.success(
-            request, 'Your information was successfully changed.')
-    else:
-        messages.error(
-            request, 'Your information could not be changed. Please correct any errors.')
-    return redirect('dashboard')
-    
-
-@require_POST
-def dashboard_about(request):
-    form = DashboardAboutForm(request.POST, instance=request.user)
-    if form.is_valid():
-        form.save()
-        messages.success(
-            request, 'Your information was successfully changed.')
-    else:
-        messages.error(
-            request, 'Your information could not be changed. Please correct any errors.')
-    return redirect('{}#profile'.format(reverse('dashboard')))
