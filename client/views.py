@@ -5,7 +5,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.views.decorators.http import require_POST, require_GET, require_http_methods
 from django.dispatch import receiver
 from django.contrib import messages
-from client.forms import SignUpForm
+from client.forms import SignUpForm, DashboardBasicInfoForm
 
 # email confirmation
 from django.contrib.sites.shortcuts import get_current_site
@@ -18,9 +18,11 @@ from django.utils.encoding import force_text
 # models
 from client.models import User
 
+# render home page
 def index(request):
     return render(request, "index.html") 
 
+# sign up with email confirmation
 def sign_up(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -43,6 +45,7 @@ def sign_up(request):
         form = SignUpForm()
     return render(request, 'registration/sign_up.html', {'form': form})
 
+# detect logins and logouts
 @receiver(user_logged_in)
 def on_user_logged_in(sender, request, user, **kwargs):
     flash_this = user.first_name or user.username
@@ -52,6 +55,7 @@ def on_user_logged_in(sender, request, user, **kwargs):
 def on_user_logged_out(sender, request, user, **kwargs):
     messages.success(request, 'You have been logged out.')
 
+# activate account via email
 def activate(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -69,6 +73,7 @@ def activate(request, uidb64, token):
         messages.error(request, 'Your account could not be verified.')
         return redirect('index')
 
+# change password mechanism
 @require_POST
 def change_password(request):
     form = PasswordChangeForm(request.user, request.POST)
@@ -81,6 +86,24 @@ def change_password(request):
         messages.error(request, 'Your password could not be changed. Please correct any errors.')
     return redirect('dashboard')
 
+# render dashboard
 def dashboard(request):
     password_change_form = PasswordChangeForm(request.user)
-    return render(request, 'dashboard.html', {'password_change_form' : password_change_form})
+    basic_info_form = DashboardBasicInfoForm(instance=request.user)
+    return render(request, 'dashboard.html', {
+        'password_change_form' : password_change_form,
+        'basic_info_form': basic_info_form,
+        })
+
+@require_POST
+def dashboard_basic_info(request):
+    form = DashboardBasicInfoForm(request.POST, instance=request.user)
+    if form.is_valid():
+        form.save()
+        messages.success(
+            request, 'Your information was successfully changed.')
+    else:
+        messages.error(
+            request, 'Your information could not be changed. Please correct any errors.')
+    return redirect('dashboard')
+    

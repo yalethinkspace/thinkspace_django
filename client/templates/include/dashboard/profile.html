@@ -16,7 +16,7 @@
         <!-- edit basic information -->
         <hr>
         <h2 class="dashboard__profile__heading">Edit basic information</h2>
-        <form>
+        <!-- <form>
             <div class="row">
                 <div class="form-group col">
                     <label>Username</label>
@@ -41,11 +41,18 @@
             <div class="d-flex justify-content-end align-items-center">
                 <button type="submit" class="btn btn-primary dashboard__profile__submit">Update</button>
             </div>
+        </form> -->
+        <form method="post" action="{% url 'basic_info' %}" novalidate>
+            {% csrf_token %} 
+            {% include 'include/generic/form.html' with form=basic_info_form %}
+            <div class="d-flex justify-content-end align-items-center">
+                <button type="submit" class="btn btn-primary dashboard__profile__submit">Change</button>
+            </div>
         </form>
         <!-- change password -->
         <hr>
         <h2 class="dashboard__profile__heading">Change password</h2>
-        <form method="post" action="/change-password/" novalidate>
+        <form method="post" action="{% url 'change_password' %}" novalidate>
             {% csrf_token %} 
             {% include 'include/generic/form.html' with form=password_change_form %}
             <div class="d-flex justify-content-end align-items-center">

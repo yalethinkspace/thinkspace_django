@@ -4,8 +4,10 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-light rounded bg-light justify-content-between">
     <!-- brand name -->
     <a class="navbar-brand" href="{% url 'index' %}">
-        <!-- anchor tag - links to another page -->
-        <img src="" width="30" height="30" class="d-inline-block align-top" alt=""> Yale Thinkspace
+        <img src="{% static 'img/logo/default.png' %}" width="30px" class="d-inline-block align-top rounded" alt="">
+    </a>
+    <a class="navbar-brand" href="{% url 'index' %}">
+        Yale Thinkspace
     </a>
     <!-- toggle button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarThinkspace" aria-controls="navbarThinkspace"
