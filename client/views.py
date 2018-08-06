@@ -74,6 +74,10 @@ def activate(request, uidb64, token):
         messages.error(request, 'Your account could not be verified.')
         return redirect('index')
 
+# render dashboard
+def dashboard(request):
+    return render(request, 'dashboard/layout.html')
+
 # change password mechanism
 @require_POST
 def change_password(request):
@@ -85,37 +89,38 @@ def change_password(request):
             request, 'Your password was successfully changed.')
     else:
         messages.error(request, 'Your password could not be changed. Please correct any errors.')
-    return redirect('dashboard')
+    return redirect('dashboard_profile')
 
-# render dashboard
-def dashboard(request):
+def dashboard_profile(request):
     if request.method == 'POST':
-        if "photo" in request.POST:
+        print(request.POST)
+        # deal with multiple forms
+        if 'photo_form' in request.POST:
             form = DashboardPhotoForm(request.POST, instance=request.user)
-        if "about" in request.POST:
+        if 'about_form' in request.POST:
             form = DashboardAboutForm(request.POST, instance=request.user)
-        if "basic_info" in request.POST:
+        if 'basic_info_form' in request.POST:
             form = DashboardBasicInfoForm(request.POST, instance=request.user)
-        if "resume" in request.POST:
+        if 'resume_form' in request.POST:
             form = DashboardResumeForm(request.POST, instance=request.user)
+        # check form validity and save 
         if form.is_valid():
             form.save()
-            messages.success(
-                request, 'Your information was successfully changed.')
+            print(form)
+            messages.success(request, 'Your information was successfully changed.')
         else:
-            messages.error(
-                request, 'Your information could not be changed. Please correct any errors.')
-        return redirect('dashboard')
+            messages.error(request, 'Your information could not be changed. Please correct any errors.')
+        return redirect('dashboard_profile')
     else:
         password_change_form = PasswordChangeForm(request.user)
         basic_info_form = DashboardBasicInfoForm(instance=request.user)
         about_form = DashboardAboutForm(instance=request.user)
         photo_form = DashboardPhotoForm(instance=request.user)
         resume_form = DashboardResumeForm(instance=request.user)
-    return render(request, 'dashboard.html', {
-        'password_change_form' : password_change_form,
+    return render(request, 'dashboard/profile.html', {
+        'password_change_form': password_change_form,
         'basic_info_form': basic_info_form,
-        'about_form' : about_form,
-        'photo_form' : photo_form,
-        'resume_form' : resume_form,
-        })
+        'about_form': about_form,
+        'photo_form': photo_form,
+        'resume_form': resume_form,
+    })

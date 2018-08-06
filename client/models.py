@@ -25,6 +25,7 @@ class User(AbstractUser):
     is_mentor = models.BooleanField(default=False)
     site_roles = models.ManyToManyField(UserSiteRole, related_name="users", blank=True)
     courses = models.ManyToManyField(Course, related_name="courses", blank=True)
+    # profile
     about = HTMLField(blank=True)
     photo = models.URLField(blank=True)
     resume = models.URLField(blank=True)
