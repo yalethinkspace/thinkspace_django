@@ -14,5 +14,3 @@ coverage.xml
 docs/_build/
 *.bak
 *.sqlite3
-media/
-static/

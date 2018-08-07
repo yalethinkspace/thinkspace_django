@@ -1,0 +1,34 @@
+.dashboard {
+    padding: 20px 0px 0px 0px;
+}
+
+.dashboard__profile__submit {
+    margin: 10px 0px 0px 0px;
+}
+
+.dashboard__profile__heading {
+    padding: 0px 0px 10px 0px;
+}
+
+.dashboard__messages__heading {
+        padding: 20px 0px 0px 0px;
+}
+
+.dashboard__messages__message-list {
+    overflow: auto;
+    height: 500px;
+    width: 100%;
+}
+
+.dashboard__messages__message {
+    padding: 10px 0px;
+}
+
+.dashboard__messages__card {
+    padding: 20px 0px;
+}
+
+.dashboard__messages__img-responsive {
+    max-width: 100%;
+    height: auto;
+}
