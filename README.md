@@ -51,7 +51,7 @@ Points of note:
 
 1. Pull requests trigger Heroku review apps to be built. Find out more here: [https://devcenter.heroku.com/articles/github-integration-review-apps](https://devcenter.heroku.com/articles/github-integration-review-apps)
 
-    You may use these review apps to debug code behavior.
+    You may use these review apps to debug code behavior. You may need to be added as a collaborator on the Heroku deploy by the project owner in order to fully explore this functionality.
 
 2. `.env` credentials are already present on Heroku. For instance, email credentials are pre-configured.
 
