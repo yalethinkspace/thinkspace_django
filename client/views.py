@@ -42,7 +42,7 @@ def sign_up(request):
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
                 'token': account_activation_token.make_token(user),
             })
-            send_mail(subject, message, 'noreply@thinkspace.com', [user.email])
+            send_mail(subject, message, 'noreply@thinkspaces.org', [user.email])
             messages.success(request, 'Your account has been created. Please check your email for a link to verify your account.')
             return redirect('index')
     else:
@@ -182,6 +182,7 @@ def dashboard_messages_conversation(request, conversation_id):
             conversation.their_unread_count += 1
             conversation.save()
             # compute the number of unseen messages
+            
         # redirect back to the conversation
         return redirect('dashboard_messages_conversation', conversation_id)
     else:

@@ -149,9 +149,9 @@ MESSAGE_TAGS = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'postmaster@sandbox7c3a47801c2c41d2bc11560c0938bddd.mailgun.org'
-EMAIL_HOST_PASSWORD = 'c2db20b516ed82fefde3c71853eb19c7-7efe8d73-718627f8'
 EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 # tinymce
 TINYMCE_DEFAULT_CONFIG = {
