@@ -178,9 +178,10 @@ def dashboard_messages_conversation(request, conversation_id):
         else:
             messages.error(
                 request, 'Your message could not be sent, please try again.')
-        # update unread count in conversation
-        conversation.their_unread_count += 1
-        conversation.save()
+            # update unread count in conversation
+            conversation.their_unread_count += 1
+            conversation.save()
+            # compute the number of unseen messages
         # redirect back to the conversation
         return redirect('dashboard_messages_conversation', conversation_id)
     else:

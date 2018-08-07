@@ -25,7 +25,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['thinkspace-django.herokuapp.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['thinkspace-django.herokuapp.com', '127.0.0.1', 'localhost', 'thinkspaces.org', 'www.thinkspaces.org']
 
 # Application definition
 
@@ -146,9 +146,12 @@ MESSAGE_TAGS = {
 }
 
 # email
-EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
-SENDGRID_API_KEY = config('SENDGRID_API_KEY')
-SENDGRID_SANDBOX_MODE_IN_DEBUG = config('SENDGRID_SANDBOX_MODE_IN_DEBUG')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'postmaster@sandbox7c3a47801c2c41d2bc11560c0938bddd.mailgun.org'
+EMAIL_HOST_PASSWORD = 'c2db20b516ed82fefde3c71853eb19c7-7efe8d73-718627f8'
+EMAIL_USE_TLS = True
 
 # tinymce
 TINYMCE_DEFAULT_CONFIG = {

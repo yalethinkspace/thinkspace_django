@@ -122,6 +122,7 @@ class Message(models.Model):
     is_join_request = models.BooleanField(default=False)
     in_trash = models.BooleanField(default=False)
     is_unread = models.BooleanField(default=True)
+    is_seen = models.BooleanField(default=False)
     # which conversation does the message belong to? (this includes receivers)
     conversation = models.ForeignKey('Conversation', on_delete=models.CASCADE, related_name="messages", null=True)
 
