@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.contrib.auth import login, authenticate, update_session_auth_hash
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST, require_GET, require_http_methods
 from django.dispatch import receiver
 from django.contrib import messages
@@ -76,10 +77,12 @@ def activate(request, uidb64, token):
         return redirect('index')
 
 # render dashboard
+@login_required(login_url='/users/login/')
 def dashboard(request):
     return render(request, 'dashboard/layout.html')
 
 # change password mechanism
+@login_required(login_url='/users/login/')
 @require_POST
 def change_password(request):
     form = PasswordChangeForm(request.user, request.POST)
@@ -92,6 +95,8 @@ def change_password(request):
         messages.error(request, 'Your password could not be changed. Please correct any errors.')
     return redirect('dashboard_profile')
 
+
+@login_required(login_url='/users/login/')
 def dashboard_profile(request):
     if request.method == 'POST':
         print(request.POST)
@@ -129,6 +134,8 @@ def dashboard_profile(request):
         'resume_form': resume_form,
     })
 
+
+@login_required(login_url='/users/login/')
 def dashboard_settings(request):
     if request.method == 'POST':
         # deal with multiple forms
@@ -144,9 +151,48 @@ def dashboard_settings(request):
         return redirect('index')
     return render(request, 'dashboard/settings.html')
 
+@login_required(login_url='/users/login/')
 def dashboard_messages_conversation_list(request):
     conversations = request.user.conversations.all()
     return render(request, 'dashboard/messages/conversation_list.html', 
     {
         "conversations" : conversations,
+    })
+
+@login_required(login_url='/users/login/')
+def dashboard_messages_conversation(request, conversation_id):
+    conversation = Conversation.objects.get(pk=conversation_id)
+    if request.method == 'POST':
+        # check if message form was sent
+        if 'message_form' in request.POST:
+            # prepare the missing fields
+            initial_message = Message.objects.create(
+                conversation=conversation,
+                sender=request.user
+            )
+            form = DashboardMessageForm(request.POST, instance=initial_message)
+        # save message to database
+        if form.is_valid():
+            form.save()
+        else:
+            messages.error(
+                request, 'Your message could not be sent, please try again.')
+        # update unread count in conversation
+        conversation.their_unread_count += 1
+        conversation.save()
+        # redirect back to the conversation
+        return redirect('dashboard_messages_conversation', conversation_id)
+    else:
+        # prepare a message form for render
+        message_form = DashboardMessageForm()
+        # mark all unread messages in the conversation as read
+        # unread_messages = conversation.messages.filter(is_unread=True)
+        # for message in unread_messages.all():
+        #     message.is_unread = False
+        #     message.save()
+        conversation.my_unread_count = 0
+        conversation.save()
+    return render(request, 'dashboard/messages/conversation.html', {
+        "conversation" : conversation,
+        "message_form" : message_form,
     })

@@ -1,0 +1,37 @@
+{% load static %}
+<!-- takes a conversation object -->
+<div class="card">
+    <a href="{% url 'dashboard_messages_conversation' conversation.id %}" class="card-link"></a>
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+            <!-- render profile pictures -->
+            {% for user in conversation.conversants.all %}
+                {% if user != request.user %}
+                    {% if user.photo %}
+                        <img src="{{ user.photo }}" height="50px" class="rounded">
+                    {% else %}
+                        <i class="fa fa-user-circle fa-lg" aria-hidden="true"></i>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            <!-- render usernames -->
+            {% for user in conversation.conversants.all %}
+                {% if user != request.user %}
+                    {% if user.first_name and user.last_name %}
+                        <span>{{ user.first_name }} {{ user.last_name }}</span>
+                    {% else %}
+                        <span>{{ user.username }}</span>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            <!-- render notification symbols (unread, requests, etc) -->
+            <div>
+                {% if conversation.my_unread_count != 0 %}
+                    <span class="badge badge-dark badge-pill">{{ conversation.my_unread_count }}</span>
+                {% else %}
+                    <i class="fas fa-check-circle" style="color:#2ECC71"></i>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

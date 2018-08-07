@@ -180,6 +180,12 @@ TINYMCE_DEFAULT_CONFIG = {
     'contextmenu': 'formats | link image',
     'menubar': True,
     'statusbar': True,
+    'image_class_list' : [
+        {
+            'title': 'Responsive',
+            'value': 'dashboard__messages__img-responsive'
+        },
+    ]
 }
 
 # Heroku: Update database configuration from $DATABASE_URL.

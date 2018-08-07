@@ -1,0 +1,15 @@
+<div class="dashboard__messages__message">
+    <!-- if you sent the message, it's on the right, if someone else sent it,
+    it's on the left -->
+    {% if message.sender == request.user %}
+        <div class="card w-75 ml-auto">
+    {% else %}
+        <div class="card w-75">
+    {% endif %}
+            <div class="card-body">
+                {% autoescape off %}
+                    {{ message.body }}
+                {% endautoescape %}
+            </div>
+        </div>
+</div>

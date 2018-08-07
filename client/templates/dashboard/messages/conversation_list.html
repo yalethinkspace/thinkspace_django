@@ -1,5 +1,5 @@
 <!-- imports -->
-{% extends "dashboard/messages/layout.html" %} 
+{% extends "dashboard/layout.html" %} 
 {% load static %}
 <!-- add page title here -->
 {% block title %} 
@@ -9,34 +9,14 @@
 {% block head %} 
     {{ block.super }} 
 {% endblock %}
+<!-- switch active panel -->
+{% block messages_active %}
+active
+{% endblock %}
 <!-- add main content here -->
-{% block messages %}
+{% block panel %}
     {% for conversation in conversations.all %}
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <!-- show profile picture of the other person in the conversation -->
-                    <div class="col">
-                        {% for user in conversation.conversants.all %}
-                            {% if user != request.user %}
-                                {% if user.photo %}
-                                    <img src="{{ user.photo }}" width="50px" class="rounded">
-                                {% else %}
-                                    <i class="fa fa-user-circle fa-lg" aria-hidden="true"></i>
-                                {% endif %}
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                    <div class="col">
-                        {% for user in conversation.conversants.all %}
-                            {% if user != request.user %}
-                                <span>{{ user.username }}</span>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% include 'dashboard/messages/components/conversation_preview.html' with conversation=conversation %}
     {% endfor %}
 {% endblock %}
 <!-- add custom scripts here -->

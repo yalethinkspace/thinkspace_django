@@ -114,18 +114,26 @@ class ProjectPost(models.Model):
         return "{} ...".format(self.post[0:20])
 
 class Message(models.Model):
-    # which user sent and received the messages?
+    # which user sent the message
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sender_messages")
-    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name="receiver_messages")
     # the associated data with the message
     body = HTMLField()
     timestamp = models.DateTimeField(auto_now_add=True)
     is_join_request = models.BooleanField(default=False)
     in_trash = models.BooleanField(default=False)
     is_unread = models.BooleanField(default=True)
-    # which conversation do the messages belong to?
+    # which conversation does the message belong to? (this includes receivers)
     conversation = models.ForeignKey('Conversation', on_delete=models.CASCADE, related_name="messages", null=True)
+
+    class Meta:
+       ordering = ['timestamp']
 
 class Conversation(models.Model):
     conversants = models.ManyToManyField(User, related_name="conversations")
-    
+    my_unread_count = models.IntegerField(default=0)
+    their_unread_count = models.IntegerField(default=0)
+    # is equal to the timestamp of the last message (helps order in conversation list view)
+    timestamp = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+       ordering = ['-timestamp']

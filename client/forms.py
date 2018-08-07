@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from tinymce import TinyMCE
-from client.models import User
+from client.models import User, Message
 
 class TinyMCEWidget(TinyMCE):
     def use_required_attribute(self, *args):
@@ -35,3 +35,8 @@ class DashboardResumeForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['resume']
+
+class DashboardMessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ['body']

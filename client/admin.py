@@ -36,10 +36,15 @@ class ProjectTagAdmin(admin.ModelAdmin):
     list_display = ["name"]
 
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ["sender", "receiver"]
+    list_display = ["sender"]
+
+class MessageInlineAdmin(admin.TabularInline):
+    model = Message
 
 class ConversationAdmin(admin.ModelAdmin):
     list_display = []
+    inlines = [MessageInlineAdmin]
+
 
 # Register your models here.
 admin.site.register(User, UserAdmin)

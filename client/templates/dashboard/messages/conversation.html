@@ -1,0 +1,65 @@
+<!-- imports -->
+{% extends "dashboard/layout.html" %} 
+{% load static %}
+<!-- add page title here -->
+{% block title %} 
+    Dashboard - Messages
+{% endblock %}
+<!-- add custom css here -->
+{% block head %} 
+    {{ block.super }}
+    {{ message_form.media }}
+{% endblock %}
+<!-- switch active panel -->
+{% block messages_active %}
+active
+{% endblock %}
+<!-- add main content here -->
+{% block panel %}
+<div class="card">
+    <div class="card-body">
+        <!-- back button-->
+        <a class="btn btn-primary" href="{% url 'dashboard_messages_conversation_list' %}"><i class="fas fa-hand-point-left"></i> Back</a>
+        <!-- render usernames -->
+        <h2 class="dashboard__messages__heading">
+            {% for user in conversation.conversants.all %}
+                {% if user != request.user %}
+                    {% if user.first_name and user.last_name %}
+                        {{ user.first_name }} {{ user.last_name }}
+                    {% else %}
+                        {{ user.username }}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </h2>
+        <!-- render messages -->
+        {% if conversation.messages.all %}
+            <div class="dashboard__messages__message-list">
+                {% for message in conversation.messages.all %}
+                    {% include 'dashboard/messages/components/message.html' with message=message %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <h5 class="dashboard__messages__heading">No messages yet, why not send one?</h5>
+        {% endif %}
+    </div>
+</div>
+<!-- render message input field -->
+<div class="dashboard__messages__card">
+    <div class="card">
+        <div class="card-body">
+            <form method="post" action="{% url 'dashboard_messages_conversation' conversation.id %}" id="message_form" novalidate>
+            {% csrf_token %} 
+            {% include 'components/form.html' with form=message_form %}
+            <div class="d-flex justify-content-end align-items-center">
+                <button type="submit" name="message_form" class="btn btn-primary">Send</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!-- add custom scripts here -->
+{% block scripts %} 
+    {{ block.super }} 
+{% endblock %}
