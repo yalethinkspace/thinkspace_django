@@ -3,8 +3,6 @@
   "scripts": {
   },
   "env": {
-    "TEST" : false,
-    "TEST 2" : "random string",
     "DEBUG" : "True",
     "EMAIL_HOST_PASSWORD": {
       "required": true
