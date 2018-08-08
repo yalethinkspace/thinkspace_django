@@ -25,7 +25,8 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['thinkspace-django.herokuapp.com', '127.0.0.1', 'localhost', 'thinkspaces.org', 'www.thinkspaces.org']
+# Set allowed hosts
+ALLOWED_HOSTS = ['*.herokuapp.com', '127.0.0.1', 'localhost', 'thinkspaces.org', 'www.thinkspaces.org']
 
 # Application definition
 
