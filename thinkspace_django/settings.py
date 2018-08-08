@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=True, cast=bool)
 
 # Set allowed hosts
-ALLOWED_HOSTS = ['*.herokuapp.com', '127.0.0.1', 'localhost', 'thinkspaces.org', 'www.thinkspaces.org']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
