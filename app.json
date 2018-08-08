@@ -3,6 +3,18 @@
   "scripts": {
   },
   "env": {
+    "DEBUG" : {
+      "required" : true
+    },
+    "EMAIL_HOST_PASSWORD": {
+      "required": true
+    },
+    "EMAIL_HOST_USER": {
+      "required": true
+    },
+    "SECRET_KEY": {
+      "required": true
+    }
   },
   "formation": {
     "web": {
