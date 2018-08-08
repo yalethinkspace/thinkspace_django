@@ -3,9 +3,7 @@
   "scripts": {
   },
   "env": {
-    "DEBUG" : {
-      "value" : "True"
-    },
+    "DEBUG" : "True",
     "EMAIL_HOST_PASSWORD": {
       "required": true
     },
