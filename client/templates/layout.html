@@ -29,9 +29,9 @@
         {% endblock %}
     </head>
     <body>
+        <!-- place the navbar outside the main container-->
+        {% include "components/navbar.html" %}
         <div class="container">
-            <!-- navbar -->
-            {% include "components/navbar.html" %}
             <!-- messages -->
             {% include 'components/messages.html' %}
             <!-- content -->
