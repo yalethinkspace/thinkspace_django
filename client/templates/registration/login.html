@@ -13,9 +13,6 @@ Login to your account
 {% block content %}
 <div class="login">
     <div class="row">
-        <div class="col-lg-6 login__left-panel">
-            <img class="login__left-panel__img" src="{% static 'img/login/left-panel.jpg' %}" width="100%"/>
-        </div>
         <div class="col-lg-6 login__right-panel">
             <div class="login__right-panel--text text-center">
                 <h2>Login</h2>
@@ -36,6 +33,9 @@ Login to your account
                 </form>
                 <p class="login__right-panel__forgot-password"><a href="{% url 'password_reset' %}" class="hide-underline">Forgot password?</a></p>
             </div>
+        </div>
+        <div class="col-lg-6 login__left-panel">
+            <img class="login__left-panel__img" src="{% static 'img/login/left-panel.jpg' %}" width="100%" />
         </div>
     </div>
 </div>
