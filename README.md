@@ -24,11 +24,11 @@
     nano .env
     ```
 
-    Replace `SECRET_KEY` with any sufficiently complex string. You can generate one in Python using:
+    Replace `SECRET_KEY` with any sufficiently complex string. You can generate one in Python3 using:
 
     ```python
-    import os
-    os.urandom(24)
+    import secrets
+    secrets.token_urlsafe(24)
     ```
 
     `EMAIL_HOST_USER` and `EMAIL_HOST_PASSWORD` can be obtained from the project owner (or you may provide credentials to your own SMTP server. This will also require modifying `settings.py`).
