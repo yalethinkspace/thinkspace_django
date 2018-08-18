@@ -1,4 +1,4 @@
-# Thinkspace
+# Thinkspaces
 
 ## Local development
 
