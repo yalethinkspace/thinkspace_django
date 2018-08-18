@@ -102,7 +102,7 @@ class ProjectComment(models.Model):
 class ProjectPost(models.Model):
     post = models.TextField()
     project = models.ForeignKey(
-        Project, on_delete=models.CASCADE, related_name="posts", blank=True, null=True)
+        Project, on_delete=models.CASCADE, related_name="project_posts", blank=True, null=True)
     private = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
@@ -138,3 +138,22 @@ class Conversation(models.Model):
 
     class Meta:
        ordering = ['-timestamp']
+
+class Post(models.Model):
+    posted_by = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="posts", blank=True, null=True
+    )
+    title = models.TextField(max_length=200, null=True)
+    body = HTMLField()
+    project = models.ForeignKey(
+        Project, on_delete=models.CASCADE, related_name="posts", blank=True, null=True)
+    is_private = models.BooleanField(default=False)
+    is_site = models.BooleanField(default=False)
+    timestamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Post"
+        verbose_name_plural = "Posts"
+
+    def __str__(self):
+        return "{} ...".format(self.body[0:20])

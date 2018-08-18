@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from client.models import (User, UserSiteRole, Course, Project, 
-ProjectCategory, ProjectJoinRequest, ProjectComment, ProjectPost, ProjectTag, Message, Conversation)
+from client.models import *
 
 # Register your models here.
 
@@ -45,6 +44,8 @@ class ConversationAdmin(admin.ModelAdmin):
     list_display = []
     inlines = [MessageInlineAdmin]
 
+class PostAdmin(admin.ModelAdmin):
+    list_display = ["title"]
 
 # Register your models here.
 admin.site.register(User, UserAdmin)
@@ -58,3 +59,4 @@ admin.site.register(ProjectPost, ProjectPostAdmin)
 admin.site.register(ProjectTag, ProjectTagAdmin)
 admin.site.register(Message, MessageAdmin) 
 admin.site.register(Conversation, ConversationAdmin)
+admin.site.register(Post, PostAdmin)

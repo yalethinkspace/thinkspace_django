@@ -20,7 +20,7 @@ from client.tokens import account_activation_token
 from django.utils.encoding import force_text
 
 # models
-from client.models import User, Message, Conversation
+from client.models import User, Message, Conversation, Post
 
 # render home page
 def index(request):
@@ -198,4 +198,11 @@ def dashboard_messages_conversation(request, conversation_id):
     return render(request, 'dashboard/messages/conversation.html', {
         "conversation" : conversation,
         "message_form" : message_form,
+    })
+
+def news(request):
+    posts = Post.objects.all()
+    return render(request, 'news.html', 
+    {
+        "posts" : posts,
     })
