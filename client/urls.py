@@ -13,7 +13,8 @@ urlpatterns = [
     path('dashboard/change_password/', views.change_password, name='change_password'),
     path('dashboard/messages/', views.dashboard_messages_conversation_list, name='dashboard_messages_conversation_list'),
     path('dashboard/messages/<int:conversation_id>/', views.dashboard_messages_conversation, name='dashboard_messages_conversation'),
-    path('news/', views.news, name='news')
+    path('news/', views.news, name='news'),
+    path('news/<int:post_id>/', views.news_item, name='news_item'),
 ]
  
    

@@ -1,0 +1,8 @@
+{% extends 'layout.html' %} 
+{% load static %} 
+{% block title %}
+    {{ post.title|truncatewords:5 }}
+{% endblock %}
+{% block content %}
+    {% include 'components/post/post_full.html' with post=post %} 
+{% endblock %}
