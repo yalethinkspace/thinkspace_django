@@ -202,7 +202,6 @@ def dashboard_messages_conversation(request, conversation_id):
 
 def news(request):
     posts = Post.objects.all()
-    return render(request, 'news.html', 
-    {
+    return render(request, 'news/news.html', {
         "posts" : posts,
     })

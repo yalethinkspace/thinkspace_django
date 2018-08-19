@@ -143,6 +143,7 @@ class Post(models.Model):
     posted_by = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="posts", blank=True, null=True
     )
+    cover_image = models.URLField(blank=True)
     title = models.TextField(max_length=200, null=True)
     body = HTMLField()
     project = models.ForeignKey(

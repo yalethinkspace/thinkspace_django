@@ -1,0 +1,23 @@
+<div class="card">
+    {% if post.cover_image %}
+        <img class="card-img-top" src="{{ post.cover_image }}" alt="Cover Image">
+    {% endif %}
+    <div class="card-body">
+        <h5 class="card-title">{{ post.title }}</h5>
+        {{ post.body|truncatewords_html:50|safe }}
+        <br>
+        <a class="btn btn-primary" href="#">
+            Read more
+        </a>
+    </div>
+    <div class="card-footer text-muted">
+        <div class="d-flex justify-content-between align-items-center">
+            <span>
+                Posted by {{ post.posted_by.username }}
+            </span>
+            <span>
+                {{ post.timestamp|timesince }} ago
+            </span>
+        </div>
+    </div>
+</div>
