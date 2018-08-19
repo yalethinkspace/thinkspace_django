@@ -104,3 +104,13 @@ nav {
     border-bottom: dotted 0.5px rgb(70, 70, 70);
     text-decoration: none;
 }
+
+/* pagination */
+
+.pagination {
+    margin: 50px 0px;
+}
+
+.pagination > * {
+    margin: 0px 5px;
+}

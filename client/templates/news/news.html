@@ -1,18 +1,23 @@
-{% extends 'layout.html' %}
-{% load static }
-{% block title %}News{% endblock %}
+{% extends 'layout.html' %} 
+{% load static %} 
+{% block title %}
+    News
+{% endblock %} 
 {% block content %}
 <div class="news">
     <h1>News</h1>
     <div class="row">
-        <!-- sidebar -->
         <div class="col-lg-3">
+            Sidebar
         </div>
         <div class="col-lg-9">
-            {% for item in posts %}
-                {% include 'components/post/post_preview.html' with post=item %}
+            {% for item in posts %} 
+                {% include 'components/post/post_preview.html' with post=item %} 
             {% endfor %}
         </div>
+    </div>
+    <div class="pagination d-flex justify-content-center align-items-center">
+        {% include 'components/pagination.html' with items=posts %}
     </div>
 </div>
 {% endblock %}

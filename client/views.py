@@ -19,6 +19,9 @@ from django.template.loader import render_to_string
 from client.tokens import account_activation_token
 from django.utils.encoding import force_text
 
+# pagination
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+
 # models
 from client.models import User, Message, Conversation, Post
 
@@ -202,6 +205,9 @@ def dashboard_messages_conversation(request, conversation_id):
 
 def news(request):
     posts = Post.objects.all()
+    paginator = Paginator(posts, 1)  # show 5 posts per page
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
     return render(request, 'news/news.html', {
         "posts" : posts,
     })
