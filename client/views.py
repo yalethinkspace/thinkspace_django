@@ -24,7 +24,7 @@ from client.models import User, Message, Conversation
 
 # render home page
 def index(request):
-    return render(request, "index.html") 
+    return render(request, "index.html")
 
 # sign up with email confirmation
 def sign_up(request):
@@ -48,6 +48,14 @@ def sign_up(request):
     else:
         form = SignUpForm()
     return render(request, 'registration/sign_up.html', {'form': form})
+
+def about(request):
+    return render(request, "registration/about.html")
+
+def FAQ(request):
+    return render(request, "registration/FAQ.html")
+def partners(request):
+    return render(request, "registration/partners.html")
 
 # detect logins and logouts
 @receiver(user_logged_in)
@@ -113,7 +121,7 @@ def dashboard_profile(request):
             form = DashboardBasicInfoForm(request.POST, instance=request.user)
         if 'resume_form' in request.POST:
             form = DashboardResumeForm(request.POST, instance=request.user)
-        # check form validity and save 
+        # check form validity and save
         if form.is_valid():
             form.save()
             print(form)
@@ -155,7 +163,7 @@ def dashboard_settings(request):
 @login_required(login_url='/users/login/')
 def dashboard_messages_conversation_list(request):
     conversations = request.user.conversations.all()
-    return render(request, 'dashboard/messages/conversation_list.html', 
+    return render(request, 'dashboard/messages/conversation_list.html',
     {
         "conversations" : conversations,
     })
@@ -182,7 +190,7 @@ def dashboard_messages_conversation(request, conversation_id):
             conversation.their_unread_count += 1
             conversation.save()
             # compute the number of unseen messages
-            
+
         # redirect back to the conversation
         return redirect('dashboard_messages_conversation', conversation_id)
     else:

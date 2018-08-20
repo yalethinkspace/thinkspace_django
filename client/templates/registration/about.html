@@ -1,0 +1,32 @@
+<!-- imports -->
+{% extends "layout.html" %}
+{% load static %}
+<!-- page title -->
+{% block title %}
+About
+{% endblock %}
+<!-- add custom css here -->
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+{% endblock %}
+<!-- add main content here -->
+{% block content %}
+<div class="login">
+    <div class="row">
+        <div class="col-lg-6 login__left-panel">
+            <div class="login__right-panel--text text-left">
+                <h2 align="center">About</h2>
+                <p>Yale Thinkspace is an online platform for collaboration and innovation. Here you can post your ideas onto the site to
+                connect with people who have the skills to contribute to your project.
+
+                At Thinkspace we hope to revolutionize creativity and entrepreneurship at Yale by bringing people together who otherwise
+                might not have. Too much of the intellectual capital of Yale goes to waste every year for this very reason. Thinkspace changes
+                the playing field and gives you the opportunity to make your team's vision a reality.</p>
+            </div>
+</div>
+    </div>
+</div>
+{% endblock %}
+<!-- add custom scripts here -->
+{% block scripts %}
+{% endblock %}

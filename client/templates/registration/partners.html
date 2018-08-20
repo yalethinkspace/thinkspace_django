@@ -1,0 +1,62 @@
+<!-- imports -->
+{% extends "layout.html" %}
+{% load static %}
+<!-- page title -->
+{% block title %}
+About
+{% endblock %}
+<!-- add custom css here -->
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+{% endblock %}
+<!-- add main content here -->
+{% block content %}
+<div class="login">
+    <div class="row">
+        <div class="col-lg-6 login__right-panel">
+            <div class="login__right-panel--text text-left">
+                <h2 align="center">Partners</h2>
+                <p>We’d like to thank the following organizations for their support of Yale Thinkspace through
+                  connections to projects, invaluable guidance, and camaraderie in the effort to cultivate the
+                  entrepreneurial ecosystem at Yale.
+
+                  Click on an image to explore what that organization offers to Yale entrepreneurs. </p>
+            </div>
+          </div>
+          <div class="col-lg-6 partners__left-panel">
+              <img class="sign-up__right-panel__img" src="{% static 'img/partners/CBEY.png' %}" width="50%" />
+          </div>
+          <div class="col-lg-6 partners__left-panel">
+              <img class="sign-up__right-panel__img" src="{% static 'img/partners/CEID.png' %}" width="50%" />
+          </div>
+          <div class="col-lg-6 partners__left-panel">
+              <img class="sign-up__right-panel__img" src="{% static 'img/partners/Helix.png' %}" width="50%" />
+          </div>
+          <div class="col-lg-6 partners__left-panel">
+              <img class="sign-up__right-panel__img" src="{% static 'img/partners/LaunchLogo.png' %}" width="50%" />
+          </div>
+          <div class="col-lg-6 partners__left-panel">
+              <img class="sign-up__right-panel__img" src="{% static 'img/partners/TSAI.png' %}" width="50%" />
+          </div>
+          <div class="col-lg-6 partners__left-panel">
+              <img class="sign-up__right-panel__img" src="{% static 'img/partners/VFA.png' %}" width="50%" />
+          </div>
+          <div class="col-lg-6 partners__left-panel">
+              <img class="sign-up__right-panel__img" src="{% static 'img/partners/W.png' %}" width="50%" />
+          </div>
+          <div class="col-lg-6 partners__left-panel">
+              <img class="sign-up__right-panel__img" src="{% static 'img/partners/Yale-SOM.png' %}" width="50%" />
+          </div>
+          <div class="col-lg-6 partners__left-panel">
+              <img class="sign-up__right-panel__img" src="{% static 'img/partners/YEM.png' %}" width="50%" />
+          </div>
+          <div class="col-lg-6 partners__left-panel">
+              <img class="sign-up__right-panel__img" src="{% static 'img/partners/YES.png' %}" width="50%" />
+          </div>
+
+    </div>
+</div>
+{% endblock %}
+<!-- add custom scripts here -->
+{% block scripts %}
+{% endblock %}

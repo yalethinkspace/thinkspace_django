@@ -1,0 +1,30 @@
+<!-- imports -->
+{% extends "layout.html" %}
+{% load static %}
+<!-- page title -->
+{% block title %}
+About
+{% endblock %}
+<!-- add custom css here -->
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+{% endblock %}
+<!-- add main content here -->
+{% block content %}
+<div class="login">
+    <div class="row">
+        <div class="col-lg-6 login__right-panel">
+            <div class="login__right-panel--text text-left">
+                <h2 align="center">Frequenty Asked Questions</h2>
+                <p>1.)How do I use Thinkspace?</p>
+                <p>2.)Is Thinkspace free?</p>
+                <p>3.)Can I become a member of multiple projects?</p>
+                <p>4.)How can I reach out to team members?</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!-- add custom scripts here -->
+{% block scripts %}
+{% endblock %}
