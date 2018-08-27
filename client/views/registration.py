@@ -6,6 +6,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from client.models import *
 # forms
 from client.forms import *
+from django.contrib.auth.forms import PasswordChangeForm
 # mailing
 from django.core.mail import send_mail # send emails
 from django.template.loader import render_to_string # render emails
@@ -15,7 +16,6 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 # in-built login utils
 from django.contrib.auth import login, authenticate, update_session_auth_hash
-from django.contrib.auth.forms import PasswordChangeForm
 # signals
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 # decorators

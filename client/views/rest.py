@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from client.models import *
 # forms
 from client.forms import *
+from django.contrib.auth.forms import PasswordChangeForm
 # signals
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 # decorators
