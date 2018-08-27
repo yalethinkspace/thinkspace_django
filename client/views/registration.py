@@ -10,20 +10,22 @@ from client.forms import *
 from django.core.mail import send_mail # send emails
 from django.template.loader import render_to_string # render emails
 # tokens
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from client.tokens import account_activation_token
 from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 # in-built login utils
 from django.contrib.auth import login, authenticate, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.decorators import login_required
 # signals
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 # decorators
 from django.dispatch import receiver
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST, require_GET, require_http_methods
 # flash messages
 from django.contrib import messages
+# other
+from django.contrib.sites.shortcuts import get_current_site
 
 # VIEWS
 

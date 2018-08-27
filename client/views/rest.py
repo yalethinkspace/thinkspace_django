@@ -1,25 +1,24 @@
-from django.urls import reverse
+# IMPORTS
+
+# response
 from django.shortcuts import render, HttpResponse, redirect
 from django.http import JsonResponse
-from django.contrib.auth import login, authenticate, update_session_auth_hash
+# models
+from client.models import *
+# forms
+from client.forms import *
+# signals
 from django.contrib.auth.signals import user_logged_in, user_logged_out
-from django.contrib.auth.forms import PasswordChangeForm
+# decorators
+from django.dispatch import receiver
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST, require_GET, require_http_methods
-from django.dispatch import receiver
+# flash messages
 from django.contrib import messages
-from client.forms import *
+# other
+from django.urls import reverse
 
-# email
-from django.core.mail import send_mail
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
-from client.tokens import account_activation_token
-
-# models
-from client.models import User, Message, Conversation, Post
+# VIEWS
 
 # render home page
 def index(request):
