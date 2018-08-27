@@ -13,93 +13,24 @@ from client.forms import *
 # email
 from django.core.mail import send_mail
 from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes
+from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from client.tokens import account_activation_token
-from django.utils.encoding import force_text
-
-# pagination
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 # models
 from client.models import User, Message, Conversation, Post
 
 # render home page
 def index(request):
-    return render(request, "index.html") 
-
-# sign up with email confirmation
-def sign_up(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.is_active = False
-            user.save()
-            current_site = get_current_site(request)
-            subject = 'Welcome to Thinkspace. Please activate your account.'
-            message = render_to_string('email/account_activation.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
-                'token': account_activation_token.make_token(user),
-            })
-            send_mail(subject, message, 'noreply@thinkspaces.org', [user.email])
-            messages.success(request, 'Your account has been created. Please check your email for a link to verify your account.')
-            return redirect('index')
-    else:
-        form = SignUpForm()
-    return render(request, 'registration/sign_up.html', {'form': form})
-
-# detect logins and logouts
-@receiver(user_logged_in)
-def on_user_logged_in(sender, request, user, **kwargs):
-    flash_this = user.first_name or user.username
-    messages.success(request, 'Hello, {}. You are now logged in.'.format(flash_this))
-
-@receiver(user_logged_out)
-def on_user_logged_out(sender, request, user, **kwargs):
-    messages.success(request, 'You have been logged out.')
-
-# activate account via email
-def activate(request, uidb64, token):
-    try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(pk=uid)
-    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-        user = None
-
-    if user is not None and account_activation_token.check_token(user, token):
-        user.is_active = True
-        user.save()
-        login(request, user)
-        messages.success(request, 'Your account has been verified.')
-        return redirect('index')
-    else:
-        messages.error(request, 'Your account could not be verified.')
-        return redirect('index')
+    return render(request, "index.html")
 
 # render dashboard
 @login_required(login_url='/users/login/')
 def dashboard(request):
     return render(request, 'dashboard/layout.html')
 
-# change password mechanism
-@login_required(login_url='/users/login/')
-@require_POST
-def change_password(request):
-    form = PasswordChangeForm(request.user, request.POST)
-    if form.is_valid():
-        user = form.save()
-        update_session_auth_hash(request, user)  # Important!
-        messages.success(
-            request, 'Your password was successfully changed.')
-    else:
-        messages.error(request, 'Your password could not be changed. Please correct any errors.')
-    return redirect('dashboard_profile')
-
-
+# dashboard profile
 @login_required(login_url='/users/login/')
 def dashboard_profile(request):
     if request.method == 'POST':
@@ -116,7 +47,7 @@ def dashboard_profile(request):
             form = DashboardBasicInfoForm(request.POST, instance=request.user)
         if 'resume_form' in request.POST:
             form = DashboardResumeForm(request.POST, instance=request.user)
-        # check form validity and save 
+        # check form validity and save
         if form.is_valid():
             form.save()
             print(form)
@@ -139,6 +70,7 @@ def dashboard_profile(request):
     })
 
 
+# dashboard settings
 @login_required(login_url='/users/login/')
 def dashboard_settings(request):
     if request.method == 'POST':
@@ -158,10 +90,11 @@ def dashboard_settings(request):
 @login_required(login_url='/users/login/')
 def dashboard_messages_conversation_list(request):
     conversations = request.user.conversations.all()
-    return render(request, 'dashboard/messages/conversation_list.html', 
+    return render(request, 'dashboard/messages/conversation_list.html',
     {
         "conversations" : conversations,
     })
+
 
 @login_required(login_url='/users/login/')
 def dashboard_messages_conversation(request, conversation_id):
@@ -185,7 +118,7 @@ def dashboard_messages_conversation(request, conversation_id):
             conversation.their_unread_count += 1
             conversation.save()
             # compute the number of unseen messages
-            
+
         # redirect back to the conversation
         return redirect('dashboard_messages_conversation', conversation_id)
     else:
@@ -203,17 +136,3 @@ def dashboard_messages_conversation(request, conversation_id):
         "message_form" : message_form,
     })
 
-def news(request):
-    posts = Post.objects.all()
-    paginator = Paginator(posts, 1)  # show 5 posts per page
-    page = request.GET.get('page')
-    posts = paginator.get_page(page)
-    return render(request, 'news/news_list.html', {
-        "posts" : posts,
-    })
-
-def news_item(request, post_id):
-    post = Post.objects.get(pk=post_id)
-    return render(request, 'news/news_item.html', {
-        "post" : post,
-    })
