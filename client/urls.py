@@ -16,6 +16,7 @@ urlpatterns = [
     path('news/', views.news, name='news'),
     path('news/<int:post_id>/', views.news_item, name='news_item'),
     path('join/', views.join, name='join'),
+    path('newsletter/', views.newsletter, name='newsletter'),
 ]
  
    
