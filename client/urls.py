@@ -15,6 +15,7 @@ urlpatterns = [
     path('dashboard/messages/<int:conversation_id>/', views.dashboard_messages_conversation, name='dashboard_messages_conversation'),
     path('news/', views.news, name='news'),
     path('news/<int:post_id>/', views.news_item, name='news_item'),
+    path('join/', views.join, name='join'),
 ]
  
    

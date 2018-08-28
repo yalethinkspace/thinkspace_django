@@ -1,0 +1,56 @@
+{% extends 'layout.html' %} 
+{% load static %} 
+{% block title %}
+    Join
+{% endblock %} 
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/join.css' %}">    
+{% endblock %}
+{% block content %}
+<div class="join">
+    <h1>Join Thinkspaces.</h1>
+    <h5>Looking to get involved? Here are some steps you can take.</h5>
+    <hr/>
+    <div class="action">
+        <h2>Stay in the loop.</h2>
+        <div class="sub-action">
+            <h4>Read our News page.</h4>
+            <p>We post upcoming events and updates on the organization and web platform (currently in development).</p>
+            <a href="{% url 'news' %}" class="btn btn-primary">Take me there</a>
+        </div>
+        <div class="sub-action">
+            <h4>Sign up for our newsletter.</h4>
+            <p>We bundle up our News and deliver it infrequently to your inbox.</p>
+            {% include 'join/components/mailchimp.html' %} 
+        </div>
+    </div>
+    <hr/>
+    <div class="action">
+        <h2>Apply to our teams.</h2>
+        <p>We are currently accepting applications from Yale University affiliates only.</p>
+        <div class="sub-action">
+            <h4>Code</h4>
+            <p>This form will be posted soon.</p> 
+        </div>
+        <div class="sub-action">
+            <h4>Design</h4>
+            <p>This form will be posted soon.</p> 
+        </div>
+        <div class="sub-action">
+            <h4>Finance</h4>
+            <p>This form will be posted soon.</p> 
+        </div>
+        <div class="sub-action">
+            <h4>General</h4>
+            <p>This form will be posted soon.</p> 
+        </div>
+    </div>
+    <hr/>
+    <div class="action">
+        <h2>Test our prototype.</h2>
+        <p>We are not quite ready for prime-time. But if you would like to start a project before functionality becomes available to everyone else, we encourage you to fill out the form below. We look forward to hearing your feedback.</p>
+        {% include 'join/components/prototype_testing.html' %}
+    </div>
+</div>
+{% endblock %}
+
